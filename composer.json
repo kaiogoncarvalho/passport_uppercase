@@ -1,6 +1,6 @@
 {
-    "name": "laravel/passport",
-    "description": "Laravel Passport provides OAuth2 server support to Laravel.",
+    "name": "kaiogoncarvalho/passport_uppercase",
+    "description": "Laravel Passport provides OAuth2 server support to Laravel adapted to Upper Case.",
     "keywords": ["laravel", "passport", "oauth"],
     "license": "MIT",
     "support": {
@@ -11,6 +11,10 @@
         {
             "name": "Taylor Otwell",
             "email": "taylor@laravel.com"
+        },
+        {
+            "name": "Kaio Carvalho",
+            "email": "kaiogoncarvalho@gmail.com"
         }
     ],
     "require": {
