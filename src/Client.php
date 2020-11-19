@@ -159,7 +159,7 @@ class Client extends Model
      */
     public function confidential()
     {
-        return ! empty($this->secret);
+        return ! empty($this->SECRET);
     }
 
     /**

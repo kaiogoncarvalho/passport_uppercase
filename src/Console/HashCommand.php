@@ -38,14 +38,14 @@ class HashCommand extends Command
             $model = Passport::clientModel();
 
             foreach ((new $model)->whereNotNull('secret')->cursor() as $client) {
-                if (password_get_info($client->secret)['algo'] === PASSWORD_BCRYPT) {
+                if (password_get_info($client->SECRET)['algo'] === PASSWORD_BCRYPT) {
                     continue;
                 }
 
                 $client->timestamps = false;
 
                 $client->forceFill([
-                    'secret' => $client->secret,
+                    'SECRET' => $client->SECRET,
                 ])->save();
             }
 
