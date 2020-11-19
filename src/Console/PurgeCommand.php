@@ -33,21 +33,21 @@ class PurgeCommand extends Command
 
         if (($this->option('revoked') && $this->option('expired')) ||
             (! $this->option('revoked') && ! $this->option('expired'))) {
-            Passport::token()->where('revoked', 1)->orWhereDate('expires_at', '<', $expired)->delete();
-            Passport::authCode()->where('revoked', 1)->orWhereDate('expires_at', '<', $expired)->delete();
-            Passport::refreshToken()->where('revoked', 1)->orWhereDate('expires_at', '<', $expired)->delete();
+            Passport::token()->where('REVOKED', 1)->orWhereDate('EXPIRES_AT', '<', $expired)->delete();
+            Passport::authCode()->where('REVOKED', 1)->orWhereDate('EXPIRES_AT', '<', $expired)->delete();
+            Passport::refreshToken()->where('REVOKED', 1)->orWhereDate('EXPIRES_AT', '<', $expired)->delete();
 
             $this->info('Purged revoked items and items expired for more than seven days.');
         } elseif ($this->option('revoked')) {
-            Passport::token()->where('revoked', 1)->delete();
-            Passport::authCode()->where('revoked', 1)->delete();
-            Passport::refreshToken()->where('revoked', 1)->delete();
+            Passport::token()->where('REVOKED', 1)->delete();
+            Passport::authCode()->where('REVOKED', 1)->delete();
+            Passport::refreshToken()->where('REVOKED', 1)->delete();
 
             $this->info('Purged revoked items.');
         } elseif ($this->option('expired')) {
-            Passport::token()->whereDate('expires_at', '<', $expired)->delete();
-            Passport::authCode()->whereDate('expires_at', '<', $expired)->delete();
-            Passport::refreshToken()->whereDate('expires_at', '<', $expired)->delete();
+            Passport::token()->whereDate('EXPIRES_AT', '<', $expired)->delete();
+            Passport::authCode()->whereDate('EXPIRES_AT', '<', $expired)->delete();
+            Passport::refreshToken()->whereDate('EXPIRES_AT', '<', $expired)->delete();
 
             $this->info('Purged items expired for more than seven days.');
         }

@@ -51,10 +51,10 @@ class RefreshTokenRepository implements RefreshTokenRepositoryInterface
     public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity)
     {
         $this->refreshTokenRepository->create([
-            'id' => $id = $refreshTokenEntity->getIdentifier(),
-            'access_token_id' => $accessTokenId = $refreshTokenEntity->getAccessToken()->getIdentifier(),
-            'revoked' => false,
-            'expires_at' => $refreshTokenEntity->getExpiryDateTime(),
+            'ID' => $id = $refreshTokenEntity->getIdentifier(),
+            'ACCESS_TOKEN_ID' => $accessTokenId = $refreshTokenEntity->getAccessToken()->getIdentifier(),
+            'REVOKED' => false,
+            'EXPIRES_AT' => $refreshTokenEntity->getExpiryDateTime(),
         ]);
 
         $this->events->dispatch(new RefreshTokenCreated($id, $accessTokenId));

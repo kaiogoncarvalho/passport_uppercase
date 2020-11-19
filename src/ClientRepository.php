@@ -46,7 +46,7 @@ class ClientRepository
 
         return $client
                     ->where($client->getKeyName(), $clientId)
-                    ->where('user_id', $userId)
+                    ->where('USER_ID', $userId)
                     ->first();
     }
 
@@ -59,8 +59,8 @@ class ClientRepository
     public function forUser($userId)
     {
         return Passport::client()
-                    ->where('user_id', $userId)
-                    ->orderBy('name', 'asc')->get();
+                    ->where('USER_ID', $userId)
+                    ->orderBy('NAME', 'asc')->get();
     }
 
     /**
@@ -113,14 +113,14 @@ class ClientRepository
     public function create($userId, $name, $redirect, $provider = null, $personalAccess = false, $password = false, $confidential = true)
     {
         $client = Passport::client()->forceFill([
-            'user_id' => $userId,
-            'name' => $name,
-            'secret' => ($confidential || $personalAccess) ? Str::random(40) : null,
-            'provider' => $provider,
-            'redirect' => $redirect,
-            'personal_access_client' => $personalAccess,
-            'password_client' => $password,
-            'revoked' => false,
+            'USER_ID' => $userId,
+            'NAME' => $name,
+            'SECRET' => ($confidential || $personalAccess) ? Str::random(40) : null,
+            'PROVIDER' => $provider,
+            'REDIRECT' => $redirect,
+            'PERSONAL_ACCESS_CLIENT' => $personalAccess,
+            'PASSWORD_CLIENT' => $password,
+            'REVOKED' => false,
         ]);
 
         $client->save();
@@ -140,7 +140,7 @@ class ClientRepository
     {
         return tap($this->create($userId, $name, $redirect, null, true), function ($client) {
             $accessClient = Passport::personalAccessClient();
-            $accessClient->client_id = $client->id;
+            $accessClient->CLIENT_ID = $client->ID;
             $accessClient->save();
         });
     }
@@ -170,7 +170,7 @@ class ClientRepository
     public function update(Client $client, $name, $redirect)
     {
         $client->forceFill([
-            'name' => $name, 'redirect' => $redirect,
+            'NAME' => $name, 'REDIRECT' => $redirect,
         ])->save();
 
         return $client;
@@ -185,7 +185,7 @@ class ClientRepository
     public function regenerateSecret(Client $client)
     {
         $client->forceFill([
-            'secret' => Str::random(40),
+            'SECRET' => Str::random(40),
         ])->save();
 
         return $client;
@@ -201,7 +201,7 @@ class ClientRepository
     {
         $client = $this->find($id);
 
-        return is_null($client) || $client->revoked;
+        return is_null($client) || $client->REVOKED;
     }
 
     /**
@@ -212,8 +212,8 @@ class ClientRepository
      */
     public function delete(Client $client)
     {
-        $client->tokens()->update(['revoked' => true]);
+        $client->tokens()->update(['REVOKED' => true]);
 
-        $client->forceFill(['revoked' => true])->save();
+        $client->forceFill(['REVOKED' => true])->save();
     }
 }

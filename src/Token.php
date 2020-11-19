@@ -11,7 +11,9 @@ class Token extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_access_tokens';
+    protected $table = 'OAUTH_ACCESS_TOKENS';
+    
+    protected $primaryKey = 'ID';
 
     /**
      * The "type" of the primary key ID.
@@ -40,8 +42,8 @@ class Token extends Model
      * @var array
      */
     protected $casts = [
-        'scopes' => 'array',
-        'revoked' => 'bool',
+        'SCOPES' => 'array',
+        'REVOKED' => 'bool',
     ];
 
     /**
@@ -50,7 +52,7 @@ class Token extends Model
      * @var array
      */
     protected $dates = [
-        'expires_at',
+        'EXPIRES_AT',
     ];
 
     /**
@@ -81,7 +83,7 @@ class Token extends Model
 
         $model = config('auth.providers.'.$provider.'.model');
 
-        return $this->belongsTo($model, 'user_id', (new $model)->getKeyName());
+        return $this->belongsTo($model, 'USER_ID', (new $model)->getKeyName());
     }
 
     /**
@@ -92,7 +94,7 @@ class Token extends Model
      */
     public function can($scope)
     {
-        if (in_array('*', $this->scopes)) {
+        if (in_array('*', $this->SCOPES)) {
             return true;
         }
 
@@ -101,7 +103,7 @@ class Token extends Model
             : [$scope];
 
         foreach ($scopes as $scope) {
-            if (array_key_exists($scope, array_flip($this->scopes))) {
+            if (array_key_exists($scope, array_flip($this->SCOPES))) {
                 return true;
             }
         }
@@ -148,7 +150,7 @@ class Token extends Model
      */
     public function revoke()
     {
-        return $this->forceFill(['revoked' => true])->save();
+        return $this->forceFill(['REVOKED' => true])->save();
     }
 
     /**

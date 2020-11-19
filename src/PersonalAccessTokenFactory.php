@@ -73,8 +73,8 @@ class PersonalAccessTokenFactory
 
         $token = tap($this->findAccessToken($response), function ($token) use ($userId, $name) {
             $this->tokens->save($token->forceFill([
-                'user_id' => $userId,
-                'name' => $name,
+                'USER_ID' => $userId,
+                'NAME' => $name,
             ]));
         });
 
@@ -93,11 +93,11 @@ class PersonalAccessTokenFactory
      */
     protected function createRequest($client, $userId, array $scopes)
     {
-        $secret = Passport::$hashesClientSecrets ? Passport::$personalAccessClientSecret : $client->secret;
+        $secret = Passport::$hashesClientSecrets ? Passport::$personalAccessClientSecret : $client->SECRET;
 
         return (new ServerRequest)->withParsedBody([
             'grant_type' => 'personal_access',
-            'client_id' => $client->id,
+            'client_id' => $client->ID,
             'client_secret' => $secret,
             'user_id' => $userId,
             'scope' => implode(' ', $scopes),

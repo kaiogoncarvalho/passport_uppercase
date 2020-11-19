@@ -55,14 +55,14 @@ class AccessTokenRepository implements AccessTokenRepositoryInterface
     public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity)
     {
         $this->tokenRepository->create([
-            'id' => $accessTokenEntity->getIdentifier(),
-            'user_id' => $accessTokenEntity->getUserIdentifier(),
-            'client_id' => $accessTokenEntity->getClient()->getIdentifier(),
-            'scopes' => $this->scopesToArray($accessTokenEntity->getScopes()),
-            'revoked' => false,
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime,
-            'expires_at' => $accessTokenEntity->getExpiryDateTime(),
+            'ID' => $accessTokenEntity->getIdentifier(),
+            'USER_ID' => $accessTokenEntity->getUserIdentifier(),
+            'CLIENT_ID' => $accessTokenEntity->getClient()->getIdentifier(),
+            'SCOPES' => $this->scopesToArray($accessTokenEntity->getScopes()),
+            'REVOKED' => false,
+            'CREATED_AT' => new DateTime,
+            'UPDATED_AT' => new DateTime,
+            'EXPIRES_AT' => $accessTokenEntity->getExpiryDateTime(),
         ]);
 
         $this->events->dispatch(new AccessTokenCreated(

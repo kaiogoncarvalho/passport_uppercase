@@ -30,10 +30,11 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_personal_access_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('client_id');
-            $table->timestamps();
+        $this->schema->create('OAUTH_PERSONAL_ACCESS_CLIENTS', function (Blueprint $table) {
+            $table->bigIncrements('ID');
+            $table->unsignedBigInteger('CLIENT_ID');
+            $table->timestamp('CREATED_AT')->nullable();
+            $table->timestamp('UPDATED_AT')->nullable();
         });
     }
 
@@ -44,7 +45,7 @@ class CreateOauthPersonalAccessClientsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_personal_access_clients');
+        $this->schema->dropIfExists('OAUTH_PERSONAL_ACCESS_CLIENTS');
     }
 
     /**

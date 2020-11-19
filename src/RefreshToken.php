@@ -11,8 +11,10 @@ class RefreshToken extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_refresh_tokens';
-
+    protected $table = 'OAUTH_REFRESH_TOKENS';
+    
+    protected $primaryKey = 'ID';
+    
     /**
      * The "type" of the primary key ID.
      *
@@ -76,7 +78,7 @@ class RefreshToken extends Model
      */
     public function revoke()
     {
-        return $this->forceFill(['revoked' => true])->save();
+        return $this->forceFill(['REVOKED' => true])->save();
     }
 
     /**

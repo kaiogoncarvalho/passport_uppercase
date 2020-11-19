@@ -40,17 +40,18 @@ class CreateOauthClientsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable()->index();
-            $table->string('name');
-            $table->string('secret', 100)->nullable();
-            $table->string('provider')->nullable();
-            $table->text('redirect');
-            $table->boolean('personal_access_client');
-            $table->boolean('password_client');
-            $table->boolean('revoked');
-            $table->timestamps();
+        $this->schema->create('OAUTH_CLIENTS', function (Blueprint $table) {
+            $table->bigIncrements('ID');
+            $table->unsignedBigInteger('USER_ID')->nullable()->index();
+            $table->string('NAME');
+            $table->string('SECRET', 100)->nullable();
+            $table->string('PROVIDER')->nullable();
+            $table->text('REDIRECT');
+            $table->boolean('PERSONAL_ACCESS_CLIENT');
+            $table->boolean('PASSWORD_CLIENT');
+            $table->boolean('REVOKED');
+            $table->timestamp('CREATED_AT')->nullable();
+            $table->timestamp('UPDATED_AT')->nullable();
         });
     }
 
@@ -61,6 +62,6 @@ class CreateOauthClientsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_clients');
+        $this->schema->dropIfExists('OAUTH_CLIENTS');
     }
 }

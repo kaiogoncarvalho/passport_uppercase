@@ -11,7 +11,9 @@ class AuthCode extends Model
      *
      * @var string
      */
-    protected $table = 'oauth_auth_codes';
+    protected $table = 'OAUTH_AUTH_CODES';
+    
+    protected $primaryKey = 'ID';
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -33,7 +35,7 @@ class AuthCode extends Model
      * @var array
      */
     protected $casts = [
-        'revoked' => 'bool',
+        'REVOKED' => 'bool',
     ];
 
     /**
@@ -42,7 +44,7 @@ class AuthCode extends Model
      * @var array
      */
     protected $dates = [
-        'expires_at',
+        'EXPIRES_AT',
     ];
 
     /**

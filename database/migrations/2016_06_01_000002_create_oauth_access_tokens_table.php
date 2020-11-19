@@ -30,15 +30,16 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('oauth_access_tokens', function (Blueprint $table) {
-            $table->string('id', 100)->primary();
-            $table->unsignedBigInteger('user_id')->nullable()->index();
-            $table->unsignedBigInteger('client_id');
-            $table->string('name')->nullable();
-            $table->text('scopes')->nullable();
-            $table->boolean('revoked');
-            $table->timestamps();
-            $table->dateTime('expires_at')->nullable();
+        $this->schema->create('OAUTH_ACCESS_TOKENS', function (Blueprint $table) {
+            $table->string('ID', 100)->primary();
+            $table->unsignedBigInteger('USER_ID')->nullable()->index();
+            $table->unsignedBigInteger('CLIENT_ID');
+            $table->string('NAME')->nullable();
+            $table->text('SCOPES')->nullable();
+            $table->boolean('REVOKED');
+            $table->timestamp('CREATED_AT')->nullable();
+            $table->timestamp('UPDATED_AT')->nullable();
+            $table->dateTime('EXPIRES_AT')->nullable();
         });
     }
 
@@ -49,7 +50,7 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('oauth_access_tokens');
+        $this->schema->dropIfExists('OAUTH_ACCESS_TOKENS');
     }
 
     /**

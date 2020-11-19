@@ -8,19 +8,19 @@ use Laravel\Passport\Client;
 
 $factory->define(Client::class, function (Faker $faker) {
     return [
-        'user_id' => null,
-        'name' => $faker->company,
-        'secret' => Str::random(40),
-        'redirect' => $faker->url,
-        'personal_access_client' => false,
-        'password_client' => false,
-        'revoked' => false,
+        'USER_ID' => null,
+        'NAME' => $this->faker->company,
+        'SECRET' => Str::random(40),
+        'REDIRECT' => $this->faker->url,
+        'PERSONAL_ACCESS_CLIENT' => false,
+        'PASSWORD_CLIENT' => false,
+        'REVOKED' => false,
     ];
 });
 
 $factory->state(Client::class, 'password_client', function (Faker $faker) {
     return [
-        'personal_access_client' => false,
-        'password_client' => true,
+        'PERSONAL_ACCESS_CLIENT' => false,
+        'PASSWORD_CLIENT' => true,
     ];
 });
