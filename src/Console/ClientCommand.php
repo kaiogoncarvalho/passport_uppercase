@@ -92,9 +92,13 @@ class ClientCommand extends Command
             $providers,
             in_array('users', $providers) ? 'users' : null
         );
+    
+        $userId = $this->option('user_id') ?: $this->ask(
+            'Which user ID should the client be assigned to?'
+        );
 
         $client = $clients->createPasswordGrantClient(
-            null, $name, 'http://localhost', $provider
+            $userId, $name, 'http://localhost', $provider
         );
 
         $this->info('Password grant client created successfully.');
