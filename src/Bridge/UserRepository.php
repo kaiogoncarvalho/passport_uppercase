@@ -63,6 +63,12 @@ class UserRepository implements UserRepositoryInterface
         } elseif (! $this->hasher->check($password, $user->getAuthPassword())) {
             return;
         }
+    
+        if (method_exists($user, 'validateForUserId')) {
+            if(!$user->validateForUserId($clientEntity->getUserId())){
+                return;
+            }
+        }
 
         return new User($user->getAuthIdentifier());
     }
