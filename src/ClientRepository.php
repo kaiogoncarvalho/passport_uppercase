@@ -30,7 +30,7 @@ class ClientRepository
     {
         $client = $this->find($id);
 
-        return $client && ! $client->revoked ? $client : null;
+        return $client && ! $client->REVOKED ? $client : null;
     }
 
     /**
@@ -72,7 +72,7 @@ class ClientRepository
     public function activeForUser($userId)
     {
         return $this->forUser($userId)->reject(function ($client) {
-            return $client->revoked;
+            return $client->REVOKED;
         })->values();
     }
 

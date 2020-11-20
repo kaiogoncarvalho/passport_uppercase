@@ -48,7 +48,7 @@ class PersonalAccessTokenController
         $tokens = $this->tokenRepository->forUser($request->user()->getAuthIdentifier());
 
         return $tokens->load('client')->filter(function ($token) {
-            return $token->client->personal_access_client && ! $token->revoked;
+            return $token->client->PERSONAL_ACCESS_CLIENT && ! $token->REVOKED;
         })->values();
     }
 
