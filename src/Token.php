@@ -60,7 +60,7 @@ class Token extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public bool $timestamps = false;
 
     /**
      * Get the client that the token belongs to.
